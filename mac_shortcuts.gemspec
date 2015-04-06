@@ -9,7 +9,7 @@ require 'mac_shortcuts/version'
 Gem::Specification.new do |s|
   s.name        = 'mac_shortcuts'
   s.version     = MacShortcuts::VERSION
-  s.date        = Date.new
+  s.date        = Date.today
   s.summary     = 'Command line tool to modify custom shortcuts in Mac applications.'
   s.description = "Command line tool to modify custom shortcuts in Mac applications.\n"
                   'For now just adding.'

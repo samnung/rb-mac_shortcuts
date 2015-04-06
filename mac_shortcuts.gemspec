@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Roman Kříž']
   s.email       = 'roman@kriz.io'
 
-  s.homepage    = "https://rubygems.org/gems/#{s.name}"
+  s.homepage    = 'https://github.com/samnung/rb-mac_shortcuts'
   s.license     = 'MIT'
 
   s.files       = Dir['bin/**/*'] + Dir['lib/**/*'] + ["#{s.name}.gemspec"]

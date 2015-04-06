@@ -25,12 +25,27 @@ module MacShortcuts
       help! 'You must specify APPLICATION or PLIST_FILE' if @application.nil?
       help! 'You must specify MENU_TITLE' if @menu_title.nil?
       help! 'You must specify SHORTCUT' if @shortcut_str.nil?
+
+      begin
+        @shortcut = Shortcut.from_pretty(@shortcut_str)
+      rescue Exception => e
+        help! e.message
+      end
+
+      @plist_path = if File.exists?(@application) && File.extname(@application) == '.plist'
+                      @application
+                    else
+                      founded = ApplicationPreferencesFinder.find_with_query(@application)
+
+                      help! "Not found location for preferences for query #{@application}" if founded.length == 0
+                      help! "Founded too many applications for query #{@application}, results are: #{founded.inspect}" if founded.length != 1
+
+                      founded.first
+                    end
     end
 
     def run
-      shortcut = Shortcut.from_pretty(@shortcut_str)
-
-      ret = system(%{defaults write "#{@application}" NSUserKeyEquivalents -dict-add "#{@menu_title}" -string "#{shortcut.to_code}"})
+      ret = system(%{defaults write "#{@plist_path}" NSUserKeyEquivalents -dict-add "#{@menu_title}" -string "#{@shortcut.to_code}"})
       unless ret
         exit 1
       end

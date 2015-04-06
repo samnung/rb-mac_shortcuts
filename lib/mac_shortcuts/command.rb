@@ -18,6 +18,6 @@ module MacShortcuts
     self.command = 'mac_shortcuts'
     self.version = VERSION
     self.description = 'Command line tool to modify custom shortcuts in Mac applications.'
-    self.plugin_prefixes = plugin_prefixes + %w(mac_shortcuts)
+    self.plugin_prefixes += %w(mac_shortcuts)
   end
 end

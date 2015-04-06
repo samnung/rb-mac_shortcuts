@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.test_files  = s.files.grep(%r{^(test|spec|features)/})
 
   s.add_runtime_dependency 'claide', '~> 0.8'
-  s.add_runtime_dependency 'bundler', '~> 1.9'
 
+  s.add_development_dependency 'bundler', '~> 1.3'
   s.add_development_dependency 'rspec', '~> 3.2'
 end

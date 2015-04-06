@@ -1,7 +1,16 @@
-
-language: ruby
-
-script: bundler exec rspec --pattern **/*_spec.rb
-
 os:
   - osx
+language: ruby
+cache: bundler
+rvm:
+  # OS X 10.9.5-10.10.0 (2.0.0-p481)
+  - system
+  # OS X 10.9.3-10.9.4
+  - 2.0.0-p451
+
+before_install:
+  # There is a bug in travis. When using system ruby, bundler is not
+  # installed and causes the default install action to fail.
+  - sudo gem install bundler
+
+script: bundler exec rspec --pattern **/*_spec.rb

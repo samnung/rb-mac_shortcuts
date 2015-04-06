@@ -11,17 +11,21 @@ module MacShortcuts
     def self.find_with_query(query)
       founded = Dir[File.join(preferences_path, "*.#{query}.plist")]
 
-      if founded.empty?
-        founded = Dir["/Applications/#{query}.app"].map do |app_path|
-          preferences_path_of(app_path)
-        end
+      return founded unless founded.empty?
+
+      apps_dirs_paths = [
+          '/Applications',
+          File.join(Dir.home, 'Applications'),
+      ]
+
+      apps_dirs_paths.each do |apps_path|
+        founded = process_apps_paths(Dir[File.join(apps_path, "#{query}.app")])
+        return founded unless founded.empty?
       end
 
-      if founded.empty?
-        founded = `mdfind "#{query}.app"`.split("\n").select { |path| path.end_with?('.app') }.map do |app_path|
-          preferences_path_of(app_path)
-        end
-      end
+      return founded unless founded.empty?
+
+      founded = process_apps_paths(`mdfind "#{query}.app"`.split("\n").select { |path| path.end_with?('.app') })
 
       founded
     end
@@ -30,6 +34,12 @@ module MacShortcuts
 
     def self.preferences_path
       @preferences_path ||= File.join(Dir.home, 'Library', 'Preferences')
+    end
+
+    def self.process_apps_paths(apps_paths)
+      apps_paths.map do |app_path|
+        preferences_path_of(app_path)
+      end
     end
 
     def self.preferences_path_of(app_path)

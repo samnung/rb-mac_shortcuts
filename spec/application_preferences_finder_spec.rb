@@ -9,9 +9,7 @@ describe MacShortcuts::ApplicationPreferencesFinder do
       applications = {
           'Terminal' => 'com.apple.Terminal.plist',
           'Safari' => 'com.apple.Safari.plist',
-          'Dash' => 'com.kapeli.dash.plist',
           'Messages' => 'com.apple.iChat.plist',
-          'Sublime Text' => 'com.sublimetext.3.plist',
       }
 
       it 'can find all applications' do

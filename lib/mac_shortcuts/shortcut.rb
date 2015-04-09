@@ -19,8 +19,11 @@ module MacShortcuts
     }.freeze
 
     KEYS_MAP = {
-        '→' => 'right',
-        '←' => 'left',
+          left: %w(← left),
+         right: %w(→ right),
+           top: %w(↑ top),
+        bottom: %w(↓ bottom),
+         enter: %w(↩ enter return),
     }
 
 
@@ -82,9 +85,9 @@ module MacShortcuts
     #
     # @return [Symbol, nil]
     #
-    def self.key_for_pretty(cmp)
+    def self.key_for_pretty(map, cmp)
       key = nil
-      PRETTY_MAP.each do |curr_key, values|
+      map.each do |curr_key, values|
         if values.include?(cmp)
           key = curr_key
           break
@@ -103,10 +106,16 @@ module MacShortcuts
       components.reject! { |cmp| cmp == '+' }
       last = components.pop
 
-      correct_last = KEYS_MAP[last] || last
+      last_key = key_for_pretty(KEYS_MAP, last)
+
+      correct_last = if last_key.nil?
+                       last
+                     else
+                       KEYS_MAP[last_key].first
+                     end
 
       components.map! do |cmp|
-        key = key_for_pretty(cmp)
+        key = key_for_pretty(PRETTY_MAP, cmp)
         if key.nil?
           raise "Unknown text for #{cmp}"
         end

@@ -4,6 +4,9 @@
 [![Build Status](http://img.shields.io/travis/samnung/rb-mac_shortcuts/master.svg?style=flat)](https://travis-ci.org/samnung/rb-mac_shortcuts)
 [![Gem Version](http://img.shields.io/gem/v/mac_shortcuts.svg?style=flat)](http://badge.fury.io/rb/mac_shortcuts)
 [![Coverage Status](https://coveralls.io/repos/samnung/rb-mac_shortcuts/badge.svg)](https://coveralls.io/r/samnung/rb-mac_shortcuts)
+[![Inline docs](http://inch-ci.org/github/samnung/rb-mac_shortcuts.png)](http://inch-ci.org/github/samnung/rb-mac_shortcuts)
+
+
 
 Do you hate setting custom shortcuts in applications on Mac as much as I do?
 Well, here is CLI tool to resolve this pain.

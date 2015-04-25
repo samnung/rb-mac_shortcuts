@@ -1,5 +1,5 @@
 
-require_relative 'helpers'
+require_relative 'spec_helper'
 
 describe MacShortcuts::ApplicationPreferencesFinder do
   context '#find_with_query' do
